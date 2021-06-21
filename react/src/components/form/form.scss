@@ -1,0 +1,43 @@
+
+.input-sec {
+  display: flex;
+margin: auto;
+  width:75%;
+  padding: 2%;
+
+input {
+  width:65%;
+  margin-right: 2%;
+}
+
+button{
+  width:25%;
+  margin-top: .3% ;
+}
+
+input,button {
+  height: 2em;
+}
+}
+
+.btn-sec {
+  display: flex;
+  margin: auto;
+    width:75%;
+    margin-bottom: 1%;  
+  
+  button{
+    width:11%;
+    margin-top: .3% ;
+    height: 2em;
+    margin-left: 3%;
+    background-color: #350058;
+    border-radius: 5px;
+    font-size: 1.1em;
+    color: bisque;
+  }
+}
+
+
+
+
