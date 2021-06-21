@@ -16,15 +16,13 @@ import './form.scss'
   }
   
 
-  takeUrl = (event) =>{
-    this.setState({url:event.target.value})
+  inputHandler = (event) => {
+    let property = event.target.name;
+    this.setState({[property]:event.target.value});
   }
 
-  takeMethod = (event) => {
-    this.setState({method:event.target.name});
-  }
-
-  showResults  = () =>{
+  showResults  = (event) =>{
+    event.preventDefault();
     let defaultChange = ` ${this.state.method}  ${this.state.url}`;
     this.setState({default:defaultChange});
   }
@@ -32,16 +30,19 @@ import './form.scss'
   render() {
     return (
       <React.Fragment>
+        <form onSubmit={this.showResults}>
       <section className="input-sec">
-        <input type="text" onChange={this.takeUrl}></input>
-        <button onClick={this.showResults}>GO</button>
+        <input type="text" name="url" onChange={this.inputHandler}></input>
+        <button>GO</button>
       </section>
 
+      {/* default type for button inside form is:submit 
+       we set it to: button, to prevent triggering submit event */}
       <section className="btn-sec">
-         <button name="Get" onClick={this.takeMethod}>GET</button>
-         <button name="Post" onClick={this.takeMethod}>POST</button>
-         <button name="Put" onClick={this.takeMethod}>PUT</button>
-         <button name="Delete" onClick={this.takeMethod}>DELETE</button>
+         <button type="button" name="method" value="get" onClick={this.inputHandler}>GET</button>
+         <button type="button" name="method" value="post" onClick={this.inputHandler}>POST</button>
+         <button type="button" name="method" value="put" onClick={this.inputHandler}>PUT</button>
+         <button type="button" name="method" value="delete" onClick={this.inputHandler}>DELETE</button>
       </section>
 
       <section className="show-result">
@@ -49,6 +50,7 @@ import './form.scss'
           {this.state.default}
         </p>
       </section>
+      </form>
       </React.Fragment>
     )
   }
