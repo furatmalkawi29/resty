@@ -14,3 +14,14 @@ function App() {
 }
 
 export default App;
+
+/* - HTTP headers let the client and the server
+ pass additional information with an HTTP request or response.
+ // Request headers 
+ // Response headers
+ 
+ Content-Type header : string
+ has type of data passed in request or received in response
+ Example// text/css, text/html , video/mp4 , application/json 
+ 
+ */
