@@ -10,9 +10,10 @@ import './form.scss'
   
     this.state = {
        default:'',
-       method:'',
+       method:"get",
        url:''
     }
+    this.showResults =this.showResults.bind(this);
   }
   
 
@@ -21,11 +22,28 @@ import './form.scss'
     this.setState({[property]:event.target.value});
   }
 
-  showResults  = (event) =>{
+
+
+  async showResults (event) {
     event.preventDefault();
+
+    let response = await fetch(this.state.url, {
+      method: this.state.method, // GET, POST, PUT, DELETE
+      /* headers: {
+         'Content-Type': 'application/json'},
+         body: JSON.stringify(data) // body data type must match "Content-Type" header*/
+    });
+    let responseData = await response.json(); //parse the response 
+
+    let headers = {'content-type' : await response.headers.get('content-type') };
+              
+    this.props.myHandler(responseData,headers);
+
     let defaultChange = ` ${this.state.method}  ${this.state.url}`;
     this.setState({default:defaultChange});
   }
+
+
 
   render() {
     return (
