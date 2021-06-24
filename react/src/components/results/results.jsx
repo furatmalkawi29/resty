@@ -9,9 +9,7 @@ import History from '../history/history'
       <React.Fragment>
       <section className="results-sec">
       <History historyHandler={this.props.historyHandler}/>
-        <p><pre>{JSON.stringify({Headers: this.props.headers},null,'\t')}</pre></p>
-
-        <p><pre>{JSON.stringify({Response: this.props.response},null,'\t')}</pre></p>
+        {this.props.children}
       </section>
       </React.Fragment>
     )

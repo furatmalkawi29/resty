@@ -4,60 +4,65 @@ import React, { Component } from 'react'
 import './form.scss'
 
  class Form extends Component {
-
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-       default:'',
-       method:"get",
-       url:'',
-       body:''
-    }
-    this.showResults =this.showResults.bind(this);
-  }
   
 
-  inputHandler = (event) => {
-    let property = event.target.name;
-    this.setState({[property]:event.target.value});
+  changeHandler = (event) => {
+    this.props.inputHandler(event.target.name, event.target.value) 
   }
 
 
 
-  async showResults (event) {
+   showResults = async (event) => {
     event.preventDefault();
-
+    let response;
+    
+    try{
+    //loading started
+    this.props.loadingHandler(true);
+    //---------------------------------fetch url :
     let options = {
-      method: this.state.method, // GET, POST, PUT, DELETE
+      method: this.props.input.method,
        headers: {
-         'Content-Type': 'application/json; charset=UTF-8'}};// body data type must match "Content-Type" header
+          // body data type must match "Content-Type" header
+         'Content-Type': 'application/json; charset=UTF-8'}};
+
 
          //add body property only when method isn't get
-         if (this.state.method !=='get') 
+         if (this.props.input.method !=='get') 
          {
-          Object.defineProperty(options, 'body',{ value:JSON.stringify({
-            title: 'foo',
-            body: 'bar',
-            userId: 1})
+           console.log( this.props.input.body);
+          Object.defineProperty(options, 'body',{ value: this.props.input.body
           });
-         }
+         } 
+         /* in browser body should follow json obj rules:
+         - both key and value are double-quoted "title":"hello" 
+         - no comma after last property */
 
-    let response = await fetch(this.state.url, options ); 
-    let responseData = await response.json(); //parse the response 
+     response = await fetch(this.props.input.url, options );
 
-    let queryObj = JSON.stringify({ url:this.state.url,
-      method:this.state.method,
-      body:this.state.body
+    let responseParsed = await response.json(); //parse the response
+    let headers = {'content-type' : await response.headers.get('content-type')};
+
+    
+    this.props.formHandler(responseParsed,headers);
+
+     //loading ended
+    this.props.loadingHandler(false);
+
+
+    
+    //-------------------------- adding to localStorage
+    let queryObj = JSON.stringify({ url:this.props.input.url,
+      method:this.props.input.method,
+      body:this.props.input.body
     });
    
-// to set unique key
+    // to set unique key
     let key = () => {
       return Math.floor((1 + Math.random()) * 0x10000)
           .toString(16)
           .substring(1);
     }
-  
 
     //check if request exist in localStorage : true exist
    let isAvailable = Object.values(localStorage).includes(queryObj);
@@ -66,15 +71,12 @@ import './form.scss'
     {localStorage.setItem(key(),
       queryObj);}
 
-
-
-    let headers = {'content-type' : await response.headers.get('content-type')};
-console.log(Object.values(localStorage));
-
-    this.props.myHandler(responseData,headers);
-
-    let defaultChange = ` ${this.state.method}  ${this.state.url}`;
-    this.setState({default:defaultChange});
+    }catch (error){
+      //error.message instead of error 
+      //not acceptable to render objects
+      this.props.errorHandler(error.message);
+      }
+      
   }
 
 
@@ -84,23 +86,18 @@ console.log(Object.values(localStorage));
       <React.Fragment>
         <form onSubmit={this.showResults}>
       <section className="input-sec">
-        <input type="text" name="url" onChange={this.inputHandler}></input>
+        <input type="text" name="url"  value={this.props.input.url}
+ onChange={this.changeHandler}></input>
         <button>GO</button>
       </section>
-      {/* default type for button inside form is:submit 
-       we set it to: button, to prevent triggering submit event */}
-      <section className="btn-sec">
-         <textarea name="body" onChange={this.inputHandler}></textarea>
-         <button type="button" name="method" value="get" onClick={this.inputHandler}>GET</button>
-         <button type="button" name="method" value="post" onClick={this.inputHandler}>POST</button>
-         <button type="button" name="method" value="put" onClick={this.inputHandler}>PUT</button>
-         <button type="button" name="method" value="delete" onClick={this.inputHandler}>DELETE</button>
-      </section>
 
-      <section className="show-result">
-        <p>
-          {this.state.default}
-        </p>
+      {/* default type for button inside form is:submit */}
+      <section className="btn-sec">
+         <textarea name="body" value={this.props.input.body} onChange={this.changeHandler}></textarea>
+         <button type="button" name="method" value="get"  onClick={this.changeHandler}>GET</button>
+         <button type="button" name="method" value="post"  onClick={this.changeHandler}>POST</button>
+         <button type="button" name="method" value="put"  onClick={this.changeHandler}>PUT</button>
+         <button type="button" name="method" value="delete"  onClick={this.changeHandler}>DELETE</button>
       </section>
       </form>
       </React.Fragment>
