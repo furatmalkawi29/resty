@@ -3,12 +3,12 @@ import './history.scss'
 
  class History extends Component {
 
-  handleQuery = (event) => {
-    console.log('user clicked on query');
+  handleClicked = (event) => {
+    console.log('from History: user clicked on query');
     let key = event.target.innerHTML.split(' ')[0];
-    let clickQuery = JSON.parse(localStorage.getItem(key));
+    let clicked = JSON.parse(localStorage.getItem(key));
 
-    this.props.historyHandler(clickQuery);
+    this.props.historyHandler(clicked);
   }
 
   
@@ -16,9 +16,10 @@ import './history.scss'
     return (
       <div className="history">
        { Object.values(localStorage).map((queryObj,index) =>
-       <div onClick= {this.handleQuery} key={index}>
-         {localStorage.key(index)} {JSON.parse(queryObj).method} {JSON.parse(queryObj).url}
-         </div>
+
+       <div onClick= {this.handleClicked} key={localStorage.key(index)}><pre>
+         {localStorage.key(index)}     {JSON.parse(queryObj).method}           {JSON.parse(queryObj).url}
+         </pre></div>
        )}
       </div>
     )
