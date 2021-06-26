@@ -8,7 +8,7 @@ import History from '../history/history'
     return (
       <React.Fragment>
       <section className="results-sec">
-      <History historyHandler={this.props.historyHandler}/>
+      <History route="home" historyHandler={this.props.historyHandler}/>
         {this.props.children}
       </section>
       </React.Fragment>

@@ -1,0 +1,26 @@
+nav {
+  background: #f0e5fd; 
+  box-shadow: 0px 10px 25px -15px rgba(19, 1, 1, 0.541);
+  margin-top:1em;
+
+  ul{
+    display: flex;
+  }
+
+  li {
+    padding: .8em 1.3em;
+    background-color: rgb(105, 59, 105);
+    margin: 0 .1%;
+    font-size: 1.3em;
+  }
+
+
+}
+
+.link_style {
+  text-decoration: none;
+color:white;
+  &:focus, &:hover, &:visited, &:link, &:active {
+      text-decoration: none;}
+
+}
