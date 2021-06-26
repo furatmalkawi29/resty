@@ -6,7 +6,7 @@ import './design/design.scss'
 function App() {
   return (
     <div className="app-style">
-      <Header></Header>
+      <Header/>
       <Main/>
       <Footer/>
     </div>

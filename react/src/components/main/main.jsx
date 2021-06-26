@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Form from '../form/form.jsx'
-import Results from '../results/results'
 import './main.scss'
-import {If,Then,Else} from 'react-if'
-
+import Home from '../../views/home'
+import Help from '../../views/help'
+import {Switch , Route } from 'react-router-dom'
+import HistoryView from '../../views/HistoryView'
 
  class Main extends Component {
   constructor(props) {
@@ -31,10 +31,12 @@ import {If,Then,Else} from 'react-if'
 this.setState({headers , response, error:null})
   }
 
+
   historyHandler = (clicked)=> {
     let {method, url , body}= clicked;
     this.setState({method, url , body});
   }
+
 
   loadingHandler = (isloading) =>{
 this.setState({isloading});
@@ -47,38 +49,25 @@ console.log("loading" + isloading);
 
 
   render() {
-    let input = {
-      method:this.state.method,
-      url:this.state.url,
-      body:this.state.body
-    }
+
 
     return(
       <main>
-        <Form loadingHandler={this.loadingHandler} formHandler={this.formHandler} inputHandler={this.inputHandler} errorHandler={this.errorHandler} input={input}/>
+        <Switch>
+        <Route exact path="/">
+        <Home  inputHandler ={this.inputHandler}
+        formHandler= {this.formHandler}
+        historyHandler= {this.historyHandler}
+        loadingHandler= {this.loadingHandler }
+        errorHandler= {this.errorHandler} state={this.state}/>
+        </Route>
 
-        <Results historyHandler={this.historyHandler}>
+        <Route path="/help" component={Help}/>
 
-   <If condition={this.state.isloading}>
-   <img src={"https://media.tenor.com/images/5f1c57a4f18059b1bb946df247f8561d/tenor.gif"} alt="Loading" />
-   </If>
-
-
-<If condition={this.state.error} >
-  <Then>
-  <p>{this.state.error}</p>
-  </Then>
-<Else>
-  <If condition={this.state.response}>
-    <Then>
-  <section className="response"><p><pre>{JSON.stringify({Headers: this.state.headers},null,'\t')}</pre></p>
-<p><pre>{JSON.stringify({Response: this.state.response},null,'\t')}</pre></p></section>
-</Then>
-  </If>
-</Else>
-</If>       
-        </Results>
-
+        <Route path="/history">
+          <HistoryView historyHandler={this.historyHandler}/>
+          </Route>
+      </Switch>
       </main>
     )
   }

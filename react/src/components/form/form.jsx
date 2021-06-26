@@ -6,12 +6,13 @@ import './form.scss'
  class Form extends Component {
   
 
+  //called when anything in form changes
   changeHandler = (event) => {
     this.props.inputHandler(event.target.name, event.target.value) 
   }
 
 
-
+   //called when Go button clicked
    showResults = async (event) => {
     event.preventDefault();
     let response;
@@ -54,7 +55,9 @@ import './form.scss'
     //-------------------------- adding to localStorage
     let queryObj = JSON.stringify({ url:this.props.input.url,
       method:this.props.input.method,
-      body:this.props.input.body
+      body:this.props.input.body,
+      response: responseParsed,
+      headers: headers,
     });
    
     // to set unique key
@@ -64,7 +67,7 @@ import './form.scss'
           .substring(1);
     }
 
-    //check if request exist in localStorage : true exist
+    //check if request exist among localStorage values: true --> exist
    let isAvailable = Object.values(localStorage).includes(queryObj);
 
     if (response.ok &&!isAvailable)//check if request was successful && not in localStorage
