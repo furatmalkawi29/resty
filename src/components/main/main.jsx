@@ -54,6 +54,7 @@ console.log("loading" + isloading);
     return(
       <main>
         <Switch>
+          {/* for github deployment, it starts with path: /resty */}
         <Route exact path="/resty">
         <Redirect to="/" />
         </Route>
