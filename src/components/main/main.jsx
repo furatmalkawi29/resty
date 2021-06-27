@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './main.scss'
 import Home from '../../views/home'
 import Help from '../../views/help'
-import {Switch , Route } from 'react-router-dom'
+import {Switch , Redirect, Route } from 'react-router-dom'
 import HistoryView from '../../views/HistoryView'
 
  class Main extends Component {
@@ -54,13 +54,18 @@ console.log("loading" + isloading);
     return(
       <main>
         <Switch>
-        <Route exact path="/">
+        <Route exact path="/resty">
+        <Redirect to="/" />
+        </Route>
+        
+        <Route>
         <Home  inputHandler ={this.inputHandler}
         formHandler= {this.formHandler}
         historyHandler= {this.historyHandler}
         loadingHandler= {this.loadingHandler }
         errorHandler= {this.errorHandler} state={this.state}/>
         </Route>
+
 
         <Route path="/help" component={Help}/>
 
