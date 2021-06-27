@@ -57,8 +57,8 @@ console.log("loading" + isloading);
         <Route exact path="/resty">
         <Redirect to="/" />
         </Route>
-        
-        <Route>
+
+        <Route exact path="/">
         <Home  inputHandler ={this.inputHandler}
         formHandler= {this.formHandler}
         historyHandler= {this.historyHandler}
