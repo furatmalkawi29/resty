@@ -30,8 +30,8 @@ class Home extends Component {
 <Else>
 <If condition={this.props.state.response}>
 <Then>
-<section className="response"><p><pre>{JSON.stringify({Headers: this.props.state.headers},null,'\t')}</pre></p>
-<p><pre>{JSON.stringify({Response: this.props.state.response},null,'\t')}</pre></p></section>
+<section className="response"><div><pre>{JSON.stringify({Headers: this.props.state.headers},null,'\t')}</pre></div>
+<div><pre>{JSON.stringify({Response: this.props.state.response},null,'\t')}</pre></div></section>
 </Then>
 </If>
 </Else>

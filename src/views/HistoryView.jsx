@@ -26,8 +26,8 @@ import {If,Then,Else} from 'react-if'
 
     <If condition={this.state.response}>
     <Then>
-    <section className="response"><p><pre>{JSON.stringify({Headers: this.state.headers},null,'\t')}</pre></p>
-    <p><pre>{JSON.stringify({Response: this.state.response},null,'\t')}</pre></p></section>
+    <section className="response"><div><pre>{JSON.stringify({Headers: this.state.headers},null,'\t')}</pre></div>
+    <div><pre>{JSON.stringify({Response: this.state.response},null,'\t')}</pre></div></section>
     </Then>
     </If>
     </section>
