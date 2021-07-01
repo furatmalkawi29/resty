@@ -1,6 +1,7 @@
 # RESTyAPP
 # Author: Fuart Malkawi
 
+[Github-Pags Deployment](https://furatmalkawi29.github.io/resty/)
 
 ## RESTy API testing application
 
@@ -11,5 +12,5 @@
 
 
 # UML
-<img src = "./react/assets/resty.png">
+<img src = "./assets/resty.png">
 
