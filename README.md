@@ -3,6 +3,9 @@
 
 [Github-Pags Deployment](https://furatmalkawi29.github.io/resty/)
 
+[Netlify Deployment](https://hardcore-liskov-5aa6fb.netlify.app)
+
+
 ## RESTy API testing application
 
 # Setup:
