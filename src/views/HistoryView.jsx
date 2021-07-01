@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../components/results/results.scss'
 import History from '../components/history/history'
-import {If,Then,Else} from 'react-if'
+import {If,Then} from 'react-if'
 
  class HistoryView extends Component {
    constructor(props){

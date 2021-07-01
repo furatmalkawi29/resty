@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './history.scss'
-import {If,Then,Else} from 'react-if'
+import {If,Then} from 'react-if'
 import {Redirect} from 'react-router-dom'
 
  class History extends Component {
