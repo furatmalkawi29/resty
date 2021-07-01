@@ -5,8 +5,16 @@ export class Help extends Component {
     return (
       
       <section className="results-sec">
-        As a user, I want to see all of my previous queries as a separate page so that I can browse them in greater detail
-As a user, I would like to view a separate “Help” page so I can learn how the application works
+ <div>- You are able to use all REST methods GET divOST DELETE PUT</div> 
+<div>add your url in the sdivace and hit GO!</div>
+
+<div>In Home page you will click on any previous route and it will be populated in form again</div>
+<div>You will get results in home page on the side</div>
+<div>In History page you will get pre saved results from before</div>
+<div> You can click on routes to get results</div>
+<div> You can click on re-run to get the route populated again in form at home page</div>
+
+
         </section>
       
     )
